@@ -106,7 +106,7 @@ function validateOrderUser(data) {
   if (!data.email || !data.email.includes("@")) {
     errors.push("必須包含 @ 符號");
   }
-  if (!data.address) {
+  if (!data.address || data.address.trim() === "") {
     errors.push("不可為空");
   }
   if (!["ATM", "Credit Card", "Apple Pay"].includes(data.payment)) {
