@@ -97,7 +97,7 @@ function validateOrderUser(data) {
   // 請實作此函式
   const errors = [];
 
-  if (!data.name) {
+  if (!data.name || data.name.trim() === "") {
     errors.push("不可為空");
   }
   if (!data.tel || !/^09\d{8}$/.test(data.tel)) {
