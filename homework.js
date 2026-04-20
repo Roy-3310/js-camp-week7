@@ -180,12 +180,16 @@ async function getProductsWithAxios() {
   // 請實作此函式
   // 提示：axios.get() 會自動解析 JSON，不需要 .json()
   // 回傳 response.data.products
-  const res = await axios.get(
-    `${BASE_URL}/api/livejs/v1/customer/${API_PATH}/products`,
-  );
-  return res.data.products;
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/api/livejs/v1/customer/${API_PATH}/products`,
+    );
+    return res.data.products;
+  } catch (error) {
+    console.error("錯誤:", error.message);
+    throw error;
+  }
 }
-
 /**
  * 2. 加入購物車（使用 Axios）
  * @param {string} productId - 產品 ID
@@ -195,18 +199,22 @@ async function getProductsWithAxios() {
 async function addToCartWithAxios(productId, quantity) {
   // 請實作此函式
   // 提示：axios.post(url, data) 會自動設定 Content-Type
-  const res = await axios.post(
-    `${BASE_URL}/api/livejs/v1/customer/${API_PATH}/carts`,
-    {
-      data: {
-        productId,
-        quantity,
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/api/livejs/v1/customer/${API_PATH}/carts`,
+      {
+        data: {
+          productId,
+          quantity,
+        },
       },
-    },
-  );
-  return res.data;
+    );
+    return res.data;
+  } catch (error) {
+    console.error("錯誤:", error.message);
+    throw error;
+  }
 }
-
 /**
  * 3. 取得訂單（使用 Axios，需認證）
  * @returns {Promise<Array>} - 回傳訂單陣列
@@ -214,15 +222,20 @@ async function addToCartWithAxios(productId, quantity) {
 async function getOrdersWithAxios() {
   // 請實作此函式
   // 提示：axios.get(url, { headers: { authorization: token } })
-  const res = await axios.get(
-    `${BASE_URL}/api/livejs/v1/admin/${API_PATH}/orders`,
-    {
-      headers: {
-        Authorization: ADMIN_TOKEN,
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/api/livejs/v1/admin/${API_PATH}/orders`,
+      {
+        headers: {
+          Authorization: ADMIN_TOKEN,
+        },
       },
-    },
-  );
-  return res.data.orders;
+    );
+    return res.data.orders;
+  } catch (error) {
+    console.error("錯誤:", error.message);
+    throw error;
+  }
 }
 
 /*
@@ -256,15 +269,20 @@ const OrderService = {
    */
   async fetchOrders() {
     // 請實作此函式
-    const res = await axios.get(
-      `${this.baseURL}/api/livejs/v1/admin/${this.apiPath}/orders`,
-      {
-        headers: {
-          authorization: this.token,
+    try {
+      const res = await axios.get(
+        `${this.baseURL}/api/livejs/v1/admin/${this.apiPath}/orders`,
+        {
+          headers: {
+            authorization: this.token,
+          },
         },
-      },
-    );
-    return res.data.orders;
+      );
+      return res.data.orders;
+    } catch (error) {
+      console.error("錯誤:", error.message);
+      throw error;
+    }
   },
 
   /**
