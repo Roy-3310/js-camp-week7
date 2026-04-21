@@ -97,7 +97,7 @@ function validateOrderUser(data) {
   // 請實作此函式
   const errors = [];
 
-  if (!data.name || data.name.trim().length === "") {
+  if (!data.name || data.name.trim().length === 0) {
     errors.push("不可為空");
   }
   if (!data.tel || !/^09\d{8}$/.test(data.tel)) {
@@ -106,7 +106,7 @@ function validateOrderUser(data) {
   if (!data.email || !data.email.includes("@")) {
     errors.push("必須包含 @ 符號");
   }
-  if (!data.address || data.address.trim().length === "") {
+  if (!data.address || data.address.trim().length === 0) {
     errors.push("不可為空");
   }
   if (!["ATM", "Credit Card", "Apple Pay"].includes(data.payment)) {
